@@ -81,13 +81,20 @@ export async function POST(req: Request) {
   }
 
   // ─── H3 : Vérification Origin (anti-CSRF) ────────────────────────────
+  // On accepte : pas d'origin (même origine, requêtes non-CORS), localhost (dev),
+  // et les déploiements Vercel (domaine principal + previews).
   const origin = req.headers.get("origin");
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
-  // En dev, origin peut être absent — on tolère localhost.
-  const isLocalhost = origin && (origin.includes("localhost") || origin.includes("127.0.0.1"));
-  if (origin && !isLocalhost && !siteUrl.startsWith(origin)) {
-    return NextResponse.json({ error: "Origine non autorisée." }, { status: 403 });
+  if (origin) {
+    const isLocalhost = origin.includes("localhost") || origin.includes("127.0.0.1");
+    const isVercelApp = origin.includes("vercel.app");
+    const isOwnDomain = process.env.NEXT_PUBLIC_SITE_URL
+      ? origin === process.env.NEXT_PUBLIC_SITE_URL.replace(/\/$/, "")
+      : false;
+    if (!isLocalhost && !isVercelApp && !isOwnDomain) {
+      return NextResponse.json({ error: "Origine non autorisée." }, { status: 403 });
+    }
   }
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
   // ─── H1 : Rate limiting par IP ───────────────────────────────────────
   const ip = getClientIP(req);
