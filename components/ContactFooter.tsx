@@ -22,17 +22,19 @@ export default function ContactFooter() {
           >
             {profile.email} →
           </a>
-          <div className="mt-[34px] flex gap-[26px]">
-            {socials.map((s) => (
-              <a
-                key={s}
-                href="#top"
-                className="text-xs font-medium uppercase tracking-[0.14em] text-mute no-underline transition-colors hover:text-white"
-              >
-                {s}
-              </a>
-            ))}
-          </div>
+          {socials.length > 0 && (
+            <div className="mt-[34px] flex gap-[26px]">
+              {socials.map((s) => (
+                <a
+                  key={s}
+                  href="#top"
+                  className="text-xs font-medium uppercase tracking-[0.14em] text-mute no-underline transition-colors hover:text-white"
+                >
+                  {s}
+                </a>
+              ))}
+            </div>
+          )}
         </Reveal>
       </section>
 

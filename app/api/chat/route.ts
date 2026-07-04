@@ -214,7 +214,7 @@ export async function POST(req: Request) {
     const openRouterKey = process.env.OPENROUTER_API_KEY;
     if (!openRouterKey) {
       return errorResponse(
-        "Je suis désolé, l'assistant est momentanément indisponible. Vous pouvez écrire directement au studio : hello@donhver.studio.",
+        "Je suis désolé, l'assistant est momentanément indisponible. Vous pouvez écrire directement au studio : herve@donhver-studios.com.",
         sessionId
       );
     }
@@ -274,7 +274,7 @@ export async function POST(req: Request) {
 
     if (!reply) {
       return errorResponse(
-        "Désolé, une erreur technique est survenue. Vous pouvez écrire directement à hello@donhver.studio.",
+        "Désolé, une erreur technique est survenue. Vous pouvez écrire directement à herve@donhver-studios.com.",
         sessionId
       );
     }

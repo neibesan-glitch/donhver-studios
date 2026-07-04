@@ -80,7 +80,7 @@ export default function ChatWidget() {
     } catch (err) {
       console.error(err);
       setError(
-        "Connexion impossible. Réessayez dans un instant, ou écrivez à hello@donhver.studio."
+        "Connexion impossible. Réessayez dans un instant, ou écrivez à herve@donhver-studios.com."
       );
     } finally {
       setLoading(false);

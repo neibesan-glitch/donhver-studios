@@ -84,7 +84,7 @@ export const profile = {
     "Marketing, UGC, publicités vidéo haut de gamme et récits cinématographiques. Nous dirigeons chaque projet comme un film — intention, lumière, cadence.",
   heroImage: "/works/thriller.jpg",
   heroCaption: { label: "AFFICHE CINÉMA", index: "/ 01" },
-  email: "hello@donhver.studio",
+  email: "herve@donhver-studios.com",
   studioEyebrow: "/ LE STUDIO",
   studioStatement: "Une idée. Une direction. Une image qui reste.",
   studioBody:
@@ -520,4 +520,7 @@ export const processSteps: ProcessStep[] = [
 
 // ─── Réseaux ────────────────────────────────────────────────────────────
 
-export const socials = ["INSTAGRAM", "BEHANCE", "LINKEDIN"];
+// Réseaux sociaux — masqués tant qu'aucun compte n'est actif.
+// Pour réactiver : ajouter les libellés ici (ex. ["Instagram", "Behance", "LinkedIn"])
+// et pointer les liens vers les vraies URLs dans ContactFooter.tsx.
+export const socials: string[] = [];
