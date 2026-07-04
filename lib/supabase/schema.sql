@@ -54,23 +54,31 @@ alter table public.leads enable row level security;
 alter table public.chat_messages enable row level security;
 
 -- INSERT public pour leads (un visiteur peut laisser ses coordonnées)
+-- Contrainte : un visiteur ne peut pas pré-définir le statut (status reste 'nouveau')
+-- ni forger created_at (valeur par défaut now()).
 drop policy if exists "leads_insert_public" on public.leads;
 create policy "leads_insert_public"
   on public.leads for insert
   to anon, authenticated
-  with check (true);
+  with check (
+    email is not null
+    and status is not distinct from 'nouveau'
+  );
 
 -- INSERT public pour chat_messages (le chatbot stocke les échanges)
+-- Contrainte : seuls les rôles valides + session_id/content non nuls sont acceptés.
 drop policy if exists "chat_messages_insert_public" on public.chat_messages;
 create policy "chat_messages_insert_public"
   on public.chat_messages for insert
   to anon, authenticated
-  with check (true);
+  with check (
+    session_id is not null
+    and content is not null
+    and role in ('user', 'assistant')
+  );
 
--- SELECT sur chat_messages limité à la session courante (pour recharger l'historique
--- d'une conversation sans exposer celles des autres)
-drop policy if exists "chat_messages_select_own_session" on public.chat_messages;
-create policy "chat_messages_select_own_session"
-  on public.chat_messages for select
-  to anon, authenticated
-  using (true); -- NOTE: à restreindre si la confidentialité entre sessions devient critique
+-- ⚠️ SÉCURITÉ : AUCUNE policy SELECT sur chat_messages ni leads.
+-- RLS refuse par défaut → seul le SERVICE_ROLE_KEY (côté serveur) peut lire.
+-- La clé anon (publique dans le navigateur) NE PEUT PAS lire les données.
+-- (Audit sécurité 2026-07-04 : la policy SELECT précédente "using (true)"
+--  exposait TOUTES les conversations + emails — faille CRITIQUE corrigée.)
