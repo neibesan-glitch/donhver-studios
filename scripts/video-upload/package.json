@@ -1,0 +1,12 @@
+{
+  "name": "video-upload",
+  "private": true,
+  "type": "module",
+  "description": "Script ponctuel : upload des vidéos finales du portfolio vers Vercel Blob. Voir README.md.",
+  "scripts": {
+    "upload": "node upload-videos.mjs"
+  },
+  "dependencies": {
+    "@vercel/blob": "^1.0.0"
+  }
+}

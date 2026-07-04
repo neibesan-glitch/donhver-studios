@@ -1,0 +1,110 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-ink text-paper antialiased;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: #e2542a;
+    color: #0b0b0c;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-ink;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full;
+    background: #2a2a2c;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-mute;
+  }
+}
+
+@layer components {
+  /* Conteneur de padding horizontal responsive — reflète clamp(20px,4vw,64px) du design */
+  .px-x {
+    @apply px-5 sm:px-8 lg:px-16;
+  }
+
+  /* Kicker au-dessus des titres / labels de section */
+  .kicker {
+    @apply text-[11px] font-semibold uppercase tracking-eyebrow text-mute;
+  }
+
+  /* Bouton plein — encre crème sur fond dark, comme le CTA hero du design */
+  .btn-solid {
+    @apply inline-flex items-center gap-2 rounded-full bg-paper px-6 py-[15px] text-xs font-semibold uppercase tracking-[0.14em] text-ink transition-[filter] duration-200 hover:brightness-90;
+  }
+
+  /* Bouton ghost — bordure discrète */
+  .btn-outline {
+    @apply inline-flex items-center gap-2 rounded-full border border-line px-6 py-[15px] text-xs font-semibold uppercase tracking-[0.14em] text-paper transition-colors duration-200 hover:border-white/30;
+  }
+
+  /* Bouton accent — orange (contact / mailto) */
+  .btn-accent {
+    @apply inline-flex items-center gap-2 rounded-full bg-accent px-10 py-[18px] text-sm font-semibold tracking-[0.06em] text-ink transition-[filter] duration-200 hover:brightness-110;
+  }
+}
+
+@layer utilities {
+  /* Overlay noise SVG fixe, très subtil — cf. div aria-hidden du design */
+  .noise-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Grille 12 colonnes helper */
+  .grid-12 {
+    @apply grid grid-cols-12;
+  }
+
+  /* Transition de zoom au hover — reflète style-hover="transform:scale(1.05)" du design */
+  .zoom-on-hover img {
+    @apply transition-transform duration-[1100ms];
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .zoom-on-hover:hover img {
+    @apply scale-105;
+  }
+
+  /* Scrollbar discrète pour le panneau du modal case study */
+  .modal-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: #2a2a2c transparent;
+  }
+  .modal-scroll::-webkit-scrollbar {
+    width: 8px;
+  }
+  .modal-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .modal-scroll::-webkit-scrollbar-thumb {
+    @apply rounded-full;
+    background: #2a2a2c;
+  }
+  .modal-scroll::-webkit-scrollbar-thumb:hover {
+    background: #8b897f;
+  }
+}
