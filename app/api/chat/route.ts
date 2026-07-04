@@ -152,17 +152,24 @@ export async function POST(req: Request) {
     // ─── Fallback multi-modèles gratuits (qualité décroissante) ───────────
     // On essaie chaque modèle dans l'ordre. Au premier qui répond, on garde.
     // On ne passe aux moins bons que si les meilleurs sont saturés/indispos.
-    // Source : classement par qualité observée sur les modèles :free actuels.
+    //
+    // IMPORTANT : la liste des modèles gratuits OpenRouter change souvent.
+    // Dernière vérification : 2026-07-03 (tests en direct ci-dessus).
+    // Les anciens modèles (gemini-2.0-flash-exp, deepseek-chat, qwen-2.5...)
+    // ont été retirés du free tier ou n'ont plus d'endpoints.
     const FREE_MODELS_FALLBACK = [
-      // Tier 1 — les meilleurs gratuits (essayer en priorité)
-      "google/gemini-2.0-flash-exp:free",          // rapide, multilingue, très bon en FR
-      "deepseek/deepseek-chat:free",                 // excellent raisonnement, FR correct
-      "meta-llama/llama-3.3-70b-instruct:free",     // gros modèle, qualité solide
-      "qwen/qwen-2.5-72b-instruct:free",            // bon multilingue, FR correct
-      // Tier 2 — corrects mais plus limités (recours)
-      "mistralai/mistral-small-3.1-24b-instruct:free",
-      "google/gemma-2-9b-it:free",
-      "meta-llama/llama-3.1-8b-instruct:free",
+      // Tier 1 — les meilleurs gratuits actuels (testés avec vrai system prompt
+      // le 2026-07-03 : réponse propre en français, suit les instructions)
+      "openai/gpt-oss-120b:free",                    // GPT open-source 120B, excellent (0.5s)
+      "openai/gpt-oss-20b:free",                     // GPT open-source 20B, très bon (2.4s)
+      "nvidia/nemotron-3-ultra-550b-a55b:free",      // 550B, bon sur requêtes simples
+      // Tier 2 — fallbacks si les précédents sont saturés
+      "nvidia/nemotron-3-super-120b-a12b:free",      // 120B, rapide
+      "google/gemma-4-31b-it:free",                  // Google Gemma 4 31B
+      "google/gemma-4-26b-a4b-it:free",              // Google Gemma 4 26B
+      // Tier 3 — recours (plus petits, moins qualitatifs)
+      "nvidia/nemotron-3-nano-30b-a3b:free",         // 30B nano
+      "meta-llama/llama-3.2-3b-instruct:free",       // petit Llama, dernier recours
     ];
 
     // Surchargable via .env (un seul modèle si besoin de test isolé)
@@ -216,6 +223,17 @@ export async function POST(req: Request) {
         const content: string | undefined = orData?.choices?.[0]?.message?.content;
         if (!content || !content.trim()) {
           errors.push(`${model} → réponse vide`);
+          continue;
+        }
+        // Filtre les modèles qui "réfléchissent à voix haute" (raisonsonnement
+        // interne leaked dans la réponse). On exige une vraie phrase adressée
+        // au visiteur, pas un monologue type "The user says: ..."
+        const trimmed = content.trim();
+        const looksLikeLeakedReasoning =
+          /^(the user|l'utilisateur|okay,|let me|i should|je dois)/i.test(trimmed) &&
+          trimmed.length < 120;
+        if (looksLikeLeakedReasoning) {
+          errors.push(`${model} → raisonnement leaked`);
           continue;
         }
 
