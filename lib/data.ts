@@ -108,8 +108,13 @@ export const marqueeItems = [
 
 // ─── Showreel / Vidéos ──────────────────────────────────────────────────
 
+// Base URL des vidéos finales hébergées sur Vercel Blob (CDN public).
+// Définie ici car utilisée par showreel + videos + works.
+const VIDS =
+  "https://spdb3opwpftoijeo.public.blob.vercel-storage.com/portfolio-videos/";
+
 export const showreel = {
-  src: "/videos/hero-video.mp4", // showreel principal 16/9
+  src: VIDS + "court-metrage-la-photo.mp4", // court-métrage 1m55s — pièce la plus ambitieuse
   title: "Showreel — Donhver Studios",
   caption: "RÉALISATION · PUBLICITÉ CINÉMATOGRAPHIQUE",
   badge: "SHOWREEL 2026",
@@ -118,32 +123,32 @@ export const showreel = {
 export const videos: VideoItem[] = [
   {
     num: "01",
-    title: "Clip Musical — Néons Urbains",
-    cat: "MUSIQUE · KLING + RUNWAY",
-    src: "/videos/seedance.mp4",
+    title: "Le Silence qui parle",
+    cat: "SPOT 60S · CASQUE ANC",
+    src: VIDS + "casque-silence-1080p.mp4",
   },
   {
     num: "02",
-    title: "Spot Publicitaire Restaurant",
-    cat: "PUBLICITÉ · SPOT 30S",
-    src: "/videos/demo.mp4",
+    title: "Botaniste",
+    cat: "UGC · 60S",
+    src: VIDS + "ugc-botaniste.mp4",
   },
   {
     num: "03",
-    title: "Promotion Immobilière",
-    cat: "IMMOBILIER · SEEDANCE",
-    // soon — pas de src
+    title: "AURA — Smartphone",
+    cat: "MOTION DESIGN · 30S",
+    src: VIDS + "aura-final.mp4",
   },
   {
     num: "04",
-    title: "Vidéo de Marque — Startup Tech",
-    cat: "BRANDING · IA",
-    // soon — pas de src
+    title: "Motel",
+    cat: "PUBLICITÉ · 62S",
+    src: VIDS + "pub-motel.mp4",
   },
 ];
 
 export const videosNote =
-  "Deux productions sont déjà en ligne. Pour les autres, envoie-moi les fichiers ou les liens YouTube / Vimeo et je les branche ici.";
+  "Sélection de projets récents. Cliquez sur « Direction & visuels » plus bas pour voir le case study complet de chaque projet (vidéo finale + brief).";
 
 // ─── Travaux / Visuels ──────────────────────────────────────────────────
 
@@ -206,139 +211,213 @@ export const works: Work[] = [
   },
 
   // ─── Projets réels (cliquables → case study) ───────────────────────────
+  // Toutes les vidéos sont hébergées sur Vercel Blob (CDN public).
   {
     num: "07",
-    kind: "PUBLICITÉ AUTOMOBILE",
-    title: "ALPHEA",
-    subtitle: "Au-delà de la route",
-    mention: "SPOT 30S · 2 CLIPS",
-    image: "/refs/alphea-refsheet.jpg",
+    kind: "UGC BOTANIQUE",
+    title: "Botaniste",
+    subtitle: "Rituel plante",
+    mention: "UGC · 60S",
+    image: "/works/ugc-botaniste.jpg",
     span: 7,
     ratio: "16/10",
     caseStudy: {
       brief: {
-        brand: "ALPHEA",
-        tagline: "Au-delà de la route.",
+        brand: "Botaniste",
+        tagline: "Le geste qui fait vivre",
         concept:
-          "Publicité 4x4 premium multi-saisons pour une marque fictive. Récit épique à travers l'automne, l'hiver, les rochers et le sommet, suivi de specs en motion graphics et signature. Le design du véhicule est verrouillé par une ref sheet (R2V) branchée sur les deux clips pour garantir la continuité visuelle.",
-        format: "30s · 2 clips × 15s",
-        tools: [
-          "Seedance 2 (image→vidéo, ratio 1470:630 — 21:9)",
-          "gpt_image_2 (ref sheet véhicule 2K)",
-          "Runway ML API (mode R2V — image_to_video)",
-        ],
-        deliverables:
-          'Clip 1 « L\'Odyssée » (récit épique multi-terrains) + Clip 2 « Les Chiffres » (hero shot + typographies specs : 4 ROUES MOTRICES, 700 KM D\'AUTONOMIE, -30°C, GARANTIE 7 ANS) + ref sheet véhicule verrouillée.',
-      },
-      refSheet: {
-        src: "/refs/alphea-refsheet.jpg",
-        label: "Ref sheet véhicule — design lock R2V (4 vues verrouillées)",
+          "Contenu UGC de 60s pour une marque botanique — format social long, registre créateur authentique mais dirigé avec la rigueur d'un plateau. Hook, démonstration du rituel, appel à l'action.",
+        format: "60s · format social",
+        tools: ["Pipeline IA (non documenté — Seedance / Runway)"],
+        deliverables: "Clip UGC 60s calibré pour Reels / TikTok / Shorts.",
       },
       video: {
-        src: "https://spdb3opwpftoijeo.public.blob.vercel-storage.com/portfolio-videos/alphea-clip1-odyssee.mp4",
+        src: VIDS + "ugc-botaniste.mp4",
       },
-      accent: "#1A3A2A",
+      accent: "#2F6B4F",
     },
   },
   {
     num: "08",
+    kind: "UGC PUBLICITÉ",
+    title: "Spot UGC",
+    subtitle: "Format démonstration",
+    mention: "UGC · 45S",
+    image: "/works/ugc-pub.jpg",
+    span: 5,
+    ratio: "3/4",
+    caseStudy: {
+      brief: {
+        brand: "Spot UGC",
+        tagline: "Le produit en action",
+        concept:
+          "Publicité UGC de 45s, registre social mid-length. Arc narratif court optimisé pour la conversion : accroche, démonstration produit, preuve sociale.",
+        format: "45s · format social",
+        tools: ["Pipeline IA (non documenté — Seedance / Runway)"],
+        deliverables: "Clip UGC 45s.",
+      },
+      video: {
+        src: VIDS + "ugc-pub.mp4",
+      },
+      accent: "#E07A3C",
+    },
+  },
+  {
+    num: "09",
+    kind: "UGC OPTIQUE",
+    title: "Lunettes",
+    subtitle: "Showcase solaires",
+    mention: "UGC · 30S",
+    image: "/works/ugc-lunette.jpg",
+    span: 5,
+    ratio: "3/4",
+    caseStudy: {
+      brief: {
+        brand: "Lunettes",
+        tagline: "Le regard qui marque",
+        concept:
+          "UGC court de 30s pour une marque de lunettes — showcase créateur, format vertical punchy optimisé pour le scroll social.",
+        format: "30s · format vertical",
+        tools: ["Pipeline IA (non documenté — Seedance / Runway)"],
+        deliverables: "Clip UGC 30s lunettes / optique.",
+      },
+      video: {
+        src: VIDS + "ugc-lunette.mp4",
+      },
+      accent: "#B5763A",
+    },
+  },
+  {
+    num: "10",
     kind: "MOTION DESIGN TECH",
     title: "AURA",
     subtitle: "La lumière dans ta main",
-    mention: "SPOT 30S · 2 CLIPS",
-    image: "/works/yara.jpg",
-    span: 5,
-    ratio: "3/4",
+    mention: "SPOT 30S · SMARTPHONE",
+    image: "/works/aura-final.jpg",
+    span: 7,
+    ratio: "16/10",
     caseStudy: {
       brief: {
         brand: "AURA",
         tagline: "La Lumière Dans Ta Main.",
         concept:
           "Publicité motion design 30s pour un smartphone premium, style Apple. Révélation cinématique de l'appareil dans un void noir infini, puis kinetic light streaks et infographics animées (écran 120Hz, 48 MP, titane, autonomie 48h). Aucune ref sheet nécessaire — le smartphone est le sujet unique.",
-        format: "30s · 2 clips × 15s",
+        format: "30s · 2 clips assemblés",
         tools: [
           "Seedance 2 (text→vidéo, ratio 864:496)",
           "Runway ML API (text_to_video, sans R2V)",
         ],
         deliverables:
-          'Clip 1 « Révélation » (close-up, ignition de l\'écran, orbite autour de l\'appareil) + Clip 2 « Infographics » (kinetic + specs animées + logo AURA).',
+          'Spot final 30s : « Révélation » (close-up, ignition de l\'écran, orbite) + « Infographics » (kinetic + specs animées + logo AURA).',
       },
       video: {
-        src: "https://spdb3opwpftoijeo.public.blob.vercel-storage.com/portfolio-videos/aura-clip1-revelation.mp4",
+        src: VIDS + "aura-final.mp4",
       },
       accent: "#0A84FF",
     },
   },
   {
-    num: "09",
-    kind: "PUB PRODUIT BOISSON",
-    title: "SLAKE",
-    subtitle: "L'Éclair",
-    mention: "SPOT 15S · HYPER-MOTION",
-    image: "/refs/slake-refsheet.jpg",
+    num: "11",
+    kind: "PUBLICITÉ HÔTELLERIE",
+    title: "Motel",
+    subtitle: "Néon & route",
+    mention: "SPOT 62S · CINÉMATOGRAPHIQUE",
+    image: "/works/pub-motel.jpg",
     span: 5,
-    ratio: "1/1",
+    ratio: "3/4",
     caseStudy: {
       brief: {
-        brand: "SLAKE",
-        tagline: "L'Éclair",
+        brand: "Motel",
+        tagline: "L'arrêt sur la route",
         concept:
-          "Publicité hyper-motion pour un thé glacé premium fictif, 15s d'énergie cinétique pure. Crash-zooms, whip pans et slow-motion liquide explosif dans un void noir studio. Aucun voiceover, aucune musique — uniquement un sound design diégétique hyper-crisp où chaque cut frappe comme un beat.",
-        format: "15s · 1 clip",
-        tools: [
-          "Seedance 2 (image→vidéo, ratio 864:496)",
-          "gpt_image_2 (ref sheet bouteille 2K)",
-          "Runway ML API (mode R2V — image_to_video)",
-        ],
-        deliverables:
-          "Clip 15s hyper-motion : crash-zoom sur glaçon, slam de bouteille, splash en couronne gelée, orbital 180°, ruban liquide anti-gravité, éruption finale. Ref sheet bouteille verrouillée.",
-      },
-      refSheet: {
-        src: "/refs/slake-refsheet.jpg",
-        label: "Ref sheet bouteille — design lock R2V (verre, label, wordmark)",
+          "Publicité cinématographique de 62s pour un motel — atmosphère Americana, road-trip, néon. Spot narratif et atmosphérique, loin du démonstratif produit.",
+        format: "62s · 16:9",
+        tools: ["Pipeline IA (non documenté — Seedance / Runway)"],
+        deliverables: "Spot narratif 62s, registre cinématographique.",
       },
       video: {
-        src: "https://spdb3opwpftoijeo.public.blob.vercel-storage.com/portfolio-videos/slake-clip1-eclair.mp4",
+        src: VIDS + "pub-motel.mp4",
       },
-      accent: "#C8662A",
+      accent: "#C2185B",
     },
   },
   {
-    num: "10",
-    kind: "ANIMATION ÉDUCATIVE",
-    title: "Pizza",
-    subtitle: "Margherita 1889",
-    mention: "ANIMATION 15S · PAPER-CUTOUT",
-    image: "/refs/pizza-styleref.jpg",
+    num: "12",
+    kind: "PUB RESTAURATION",
+    title: "Pasta",
+    subtitle: "Cuisine italienne",
+    mention: "SPOT 34S · FOOD",
+    image: "/works/pub-pasta.jpg",
     span: 7,
     ratio: "16/10",
     caseStudy: {
       brief: {
-        brand: "PIZZA EDU",
-        tagline: "Des origines à Naples",
+        brand: "Pasta",
+        tagline: "L'appetit qui parle",
         concept:
-          "Animation pédagogique 2D paper-cutout retraçant l'histoire de la pizza, de la Méditerranée antique à Naples 1889 (naissance de la Margherita). Esthétique collage de papier kraft déchiré aux ciseaux, avec ombres portées et détails à l'encre/aquarelle. Ton chaleureux et pédagogique, style livre illustré.",
-        format: "15s · 1 clip",
-        tools: [
-          "Seedance 2 (image→vidéo, ratio 864:496)",
-          "gpt_image_2 (style ref paper-cutout 2K)",
-          "Runway ML API (mode R2V — image_to_video avec @style_ref)",
-        ],
-        deliverables:
-          "Clip 15s 2D paper-cutout : carte de la Méditerranée, paysan antique + four à bois, rue de Naples 18e siècle, reine 1889 + pizza Margherita (drapeau italien), fin sur livre d'histoires ouvert. Style ref verrouillée.",
-      },
-      refSheet: {
-        src: "/refs/pizza-styleref.jpg",
-        label: "Style ref paper-cutout — esthétique verrouillée (R2V style)",
+          "Publicité de 34s pour un restaurant italien — appetite-appeal, gros plans steaming, cuisine en mouvement. Spot restaurateur classique, registre gourmand.",
+        format: "34s · 16:9",
+        tools: ["Pipeline IA (non documenté — Seedance / Runway)"],
+        deliverables: "Spot food 34s pour restaurant italien.",
       },
       video: {
-        src: "https://spdb3opwpftoijeo.public.blob.vercel-storage.com/portfolio-videos/pizza-clip1-origines.mp4",
+        src: VIDS + "pub-pasta.mp4",
       },
-      accent: "#C97B3F",
+      accent: "#C0392B",
     },
   },
   {
-    num: "11",
+    num: "13",
+    kind: "PUB HUMOUR",
+    title: "Comédie",
+    subtitle: "Publicité drôle",
+    mention: "SPOT 28S · HUMOUR",
+    image: "/works/pub-comedie.jpg",
+    span: 5,
+    ratio: "3/4",
+    caseStudy: {
+      brief: {
+        brand: "Comédie publicitaire",
+        tagline: "Le rire qui convertit",
+        concept:
+          "Publicité humoristique de 28s — ton comique, pitch décalé. Se démarque des pièces premium/cinématographiques par son registre léger et viral.",
+        format: "28s · 16:9",
+        tools: ["Pipeline IA (non documenté — Seedance / Runway)"],
+        deliverables: "Spot comédie 28s.",
+      },
+      video: {
+        src: VIDS + "pub-comedie.mp4",
+      },
+      accent: "#E8B931",
+    },
+  },
+  {
+    num: "14",
+    kind: "COURT-MÉTRAGE",
+    title: "La Photo",
+    subtitle: "Récit narratif",
+    mention: "COURT-MÉTRAGE · 1M55S",
+    image: "/works/court-metrage-la-photo.jpg",
+    span: 7,
+    ratio: "16/10",
+    caseStudy: {
+      brief: {
+        brand: "La Photo",
+        tagline: "Une image, toute une histoire",
+        concept:
+          "Court-métrage narratif de 1m55s centré sur une photographie. Pièce de cinéma, pas une publicité — la plus longue du portfolio. Démontre la mise en scène longue forme et la direction de récit.",
+        format: "1m55s · court-métrage",
+        tools: ["Pipeline IA (non documenté — Seedance / Runway)"],
+        deliverables: "Court-métrage narratif 1m55s.",
+      },
+      video: {
+        src: VIDS + "court-metrage-la-photo.mp4",
+      },
+      accent: "#6B6660",
+    },
+  },
+  {
+    num: "15",
     kind: "PUB CINÉMATOGRAPHIQUE",
     title: "Le Silence",
     subtitle: "qui parle",
@@ -363,7 +442,7 @@ export const works: Work[] = [
           "Spot 60s cinématographique : Acte I « L'agression » (cuts rapides) → Acte II « La bascule » (cut total + piano) → Acte III « L'évasion » (golden hour, master shot 3 couches, signature produit). Démonstration de mise en scène : découpage varié, direction photo, sound design narratif.",
       },
       video: {
-        src: "https://spdb3opwpftoijeo.public.blob.vercel-storage.com/portfolio-videos/casque-silence-1080p.mp4",
+        src: VIDS + "casque-silence-1080p.mp4",
       },
       accent: "#5B7C99",
     },
