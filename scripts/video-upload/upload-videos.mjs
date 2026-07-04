@@ -40,7 +40,7 @@ async function loadEnv() {
 // "caseStudyKey" = la marque telle qu'elle apparaît dans portfolio/lib/data.ts.
 // "src" = chemin local vers le fichier vidéo (relatif à ce script).
 // Tu peux ajuster les chemins si tes vidéos sont rangées autrement.
-const ROOT = path.resolve(__dirname, "../../../.."); // racine du dépôt seedance/
+const ROOT = path.resolve(__dirname, "../../.."); // racine du dépôt seedance/ (portfolio/scripts/video-upload → 3 niveaux)
 const CASQUE_DIR = path.resolve(
   "C:/Users/herbe/OneDrive/Documents/Projet/livre/livraisons/pub-casque-silence"
 );

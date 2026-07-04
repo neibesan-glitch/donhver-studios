@@ -235,7 +235,7 @@ export const works: Work[] = [
         label: "Ref sheet véhicule — design lock R2V (4 vues verrouillées)",
       },
       video: {
-        note: "Vidéo finale à brancher via URL externe (Vercel Blob / Storage)",
+        src: "https://spdb3opwpftoijeo.public.blob.vercel-storage.com/portfolio-videos/alphea-clip1-odyssee.mp4",
       },
       accent: "#1A3A2A",
     },
@@ -264,7 +264,7 @@ export const works: Work[] = [
           'Clip 1 « Révélation » (close-up, ignition de l\'écran, orbite autour de l\'appareil) + Clip 2 « Infographics » (kinetic + specs animées + logo AURA).',
       },
       video: {
-        note: "Vidéo finale à brancher via URL externe (Vercel Blob / Storage)",
+        src: "https://spdb3opwpftoijeo.public.blob.vercel-storage.com/portfolio-videos/aura-clip1-revelation.mp4",
       },
       accent: "#0A84FF",
     },
@@ -298,7 +298,7 @@ export const works: Work[] = [
         label: "Ref sheet bouteille — design lock R2V (verre, label, wordmark)",
       },
       video: {
-        note: "Vidéo finale à brancher via URL externe (Vercel Blob / Storage)",
+        src: "https://spdb3opwpftoijeo.public.blob.vercel-storage.com/portfolio-videos/slake-clip1-eclair.mp4",
       },
       accent: "#C8662A",
     },
@@ -332,7 +332,7 @@ export const works: Work[] = [
         label: "Style ref paper-cutout — esthétique verrouillée (R2V style)",
       },
       video: {
-        note: "Vidéo finale à brancher via URL externe (Vercel Blob / Storage)",
+        src: "https://spdb3opwpftoijeo.public.blob.vercel-storage.com/portfolio-videos/pizza-clip1-origines.mp4",
       },
       accent: "#C97B3F",
     },
@@ -363,7 +363,7 @@ export const works: Work[] = [
           "Spot 60s cinématographique : Acte I « L'agression » (cuts rapides) → Acte II « La bascule » (cut total + piano) → Acte III « L'évasion » (golden hour, master shot 3 couches, signature produit). Démonstration de mise en scène : découpage varié, direction photo, sound design narratif.",
       },
       video: {
-        note: "Vidéo finale (161 Mo) à héberger sur Vercel Blob / Storage puis brancher via URL",
+        src: "https://spdb3opwpftoijeo.public.blob.vercel-storage.com/portfolio-videos/casque-silence-1080p.mp4",
       },
       accent: "#5B7C99",
     },
