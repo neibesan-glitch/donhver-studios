@@ -49,6 +49,7 @@ export type CaseStudy = {
   video?: {
     src?: string; // URL de la vidéo finale (à brancher plus tard)
     note?: string; // ex. "Vidéo à brancher via URL externe"
+    ratio?: "16/9" | "9/16" | "1/1"; // format de la vidéo (défaut 16/9)
   };
   accent: string; // hex de la marque pour touches subtiles
 };
@@ -233,6 +234,7 @@ export const works: Work[] = [
       },
       video: {
         src: VIDS + "ugc-botaniste.mp4",
+        ratio: "9/16",
       },
       accent: "#2F6B4F",
     },
@@ -258,6 +260,7 @@ export const works: Work[] = [
       },
       video: {
         src: VIDS + "ugc-pub.mp4",
+        ratio: "9/16",
       },
       accent: "#E07A3C",
     },
@@ -283,6 +286,7 @@ export const works: Work[] = [
       },
       video: {
         src: VIDS + "ugc-lunette.mp4",
+        ratio: "9/16",
       },
       accent: "#B5763A",
     },
@@ -337,6 +341,7 @@ export const works: Work[] = [
       },
       video: {
         src: VIDS + "pub-motel.mp4",
+        ratio: "1/1",
       },
       accent: "#C2185B",
     },

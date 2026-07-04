@@ -108,17 +108,28 @@ export default function CaseStudyModal({ caseStudy, onClose }: Props) {
               {/* ─── Vidéo finale ─── */}
               <section className="px-6 sm:px-10">
                 <SectionLabel>Résultat final</SectionLabel>
-                {caseStudy.video?.src ? (
-                  <div className="relative aspect-video overflow-hidden rounded-lg border border-line bg-black">
-                    <video
-                      controls
-                      playsInline
-                      preload="metadata"
-                      src={caseStudy.video.src}
-                      className="block h-full w-full bg-black object-cover"
-                    />
-                  </div>
-                ) : (
+                {caseStudy.video?.src ? (() => {
+                  const ratio = caseStudy.video.ratio ?? "16/9";
+                  // Conteneur adaptatif : les vidéos verticales (9:16) sont
+                  // centrées et limitées en largeur pour rester raisonnables.
+                  const aspectClass =
+                    ratio === "9/16"
+                      ? "aspect-[9/16] max-w-[360px] mx-auto"
+                      : ratio === "1/1"
+                        ? "aspect-square max-w-[560px] mx-auto"
+                        : "aspect-video";
+                  return (
+                    <div className={`relative overflow-hidden rounded-lg border border-line bg-black ${aspectClass}`}>
+                      <video
+                        controls
+                        playsInline
+                        preload="metadata"
+                        src={caseStudy.video.src}
+                        className="block h-full w-full bg-black object-cover"
+                      />
+                    </div>
+                  );
+                })() : (
                   <div className="flex aspect-video flex-col items-center justify-center gap-3.5 overflow-hidden rounded-lg border border-dashed border-line bg-gradient-to-br from-[#161618] to-[#0e0e10]">
                     <span className="flex h-[52px] w-[52px] items-center justify-center rounded-full border border-line text-base text-cream">
                       ▶
