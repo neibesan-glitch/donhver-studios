@@ -20,9 +20,13 @@ export function middleware(_req: NextRequest) {
   // - fonts.googleapis.com / fonts.gstatic.com (Anton + Archivo)
   // - *.supabase.co (API + storage)
   // - *.vercel-storage.com (Blob vidéos)
-  // - openrouter n'est appelé QUE côté serveur (pas dans connect-src client)
+  // - 'unsafe-inline' sur script-src EST REQUIS pour Next.js (hydration inline).
+  //   Sans ça, React ne s'hydrate pas et le site reste invisible/non-fonctionnel.
+  //   (Pour une CSP stricte sans unsafe-inline, il faudrait les nonces par requête
+  //    — complexe pour ce portfolio. unsafe-inline reste un bon compromis ici.)
   const csp = [
     "default-src 'self'",
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
     "img-src 'self' https: data:",
     "media-src 'self' https:",
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
